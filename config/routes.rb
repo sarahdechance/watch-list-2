@@ -3,4 +3,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  # film : pas de routes
+  # list : toutes
+  # bookmarks : toutes, nested
+
+  resources :lists, except: :new do
+    resources :bookmarks, only: %i[new create destroy]
+  end
+
 end
