@@ -1,0 +1,23 @@
+<div class="card-block-movie">
+  <%= link_to bookmark_path(bookmark), class: "link-fixed-cards movie-link", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+    <i class="fa-solid fa-x"></i>
+  <% end %>
+
+
+  <div class="card-movie">
+    <%= image_tag(movie.poster_url) %>
+    <div class="card-movie-infos">
+      <div class="card-movie-top">
+        <h2 class="card-movie-title"><%= movie.title %></h2>
+        <h2 class="card-movie-rating"><%= movie.rating %> / 10</h2>
+      </div>
+      <div class="card-movie-overview">
+        <h6>My comment : <em><%= bookmark.comment %></em></h6>
+        <p><%= movie.overview %></p>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

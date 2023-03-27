@@ -1,29 +1,52 @@
+<!-- Start of Banner -->
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://media.gqmagazine.fr/photos/6399e729aa342b4423bab367/16:9/w_2560%2Cc_limit/GettyImages-636899879.jpg);">
+  <div class="container">
+    <div class="index-banner">
+      <h1>Check out your lists</h1>
+      <% if List.all.count == 0 %>
+        <p>You have no movie list yet</p>
+      <% elsif List.all.count == 1 %>
+        <p>You have <%= List.all.count %> movie list</p>
+      <% else %>
+        <p>You have <%= List.all.count %> movie lists</p>
+      <% end %>
+
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Create a new one
+      </button>
+    </div>
+  </div>
+</div>
+<!-- End of Banner -->
+
+
+<!-- Start of Body -->
 <div class="container">
+  <div class="cards">
+    <% @lists.each do |list| %>
+      <%= render 'shared/list_card', list: list %>
+    <% end %>
+  </div>
+</div>
+<!-- End of Body -->
 
-  <h1>Check out your lists</h1>
-  <h4>You have <%= List.all.count %> lists</h4>
 
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Create a new list
-  </button>
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">New movie list :</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <%= simple_form_for @list do |f| %>
-            <%= f.input :name, label: false, placeholder: "List name" %>
-            <%= f.button :submit, "Create", class: "btn btn-primary" %>
-          <% end %>
-        </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">New movie list :</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for @list do |f| %>
+          <%= f.input :name, label: false, placeholder: "List name" %>
+          <%= f.button :submit, "Create", class: "btn btn-primary" %>
+        <% end %>
       </div>
     </div>
   </div>
-
 </div>

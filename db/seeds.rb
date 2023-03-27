@@ -9,7 +9,9 @@
 require "json"
 require "open-uri"
 
-p "Deleting Movies"
+p "Deleting data"
+Bookmark.destroy_all
+List.destroy_all
 Movie.destroy_all
 
 p "Creating new movies"
@@ -19,7 +21,8 @@ url = "http://tmdb.lewagon.com/movie/top_rated?api_key=#{api_key}&language=en-US
 movies = JSON.parse(URI.open(url).read)
 
 movies["results"].each do |movie|
-  Movie.create!(title: movie["title"], overview: movie["overview"], poster_url: movie["poster_path"], rating: movie["vote_average"])
+  poster_url = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2#{movie["poster_path"]}"
+  Movie.create!(title: movie["title"], overview: movie["overview"], poster_url: poster_url, rating: movie["vote_average"])
 end
 
 p "#{Movie.all.count} movies created"

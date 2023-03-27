@@ -1,2 +1,49 @@
-<%= @list.name %>
+<!-- Start of Banner -->
+<div class="banner list-show-banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://media.gqmagazine.fr/photos/6399e729aa342b4423bab367/16:9/w_2560%2Cc_limit/GettyImages-636899879.jpg);">
+  <%= link_to lists_path do %>
+    <i class="fa-solid fa-arrow-left"></i>
+  <% end %>
+  <div class="container">
+    <div class="index-banner">
+      <h1><%= @list.name %></h1>
 
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add a movie
+      </button>
+
+    </div>
+  </div>
+</div>
+<!-- End of Banner -->
+
+<!-- Start of Body -->
+<div class="container">
+  <div class="cards">
+    <% @list.movies.each do |movie| %>
+      <%= render 'shared/movie_card', movie: movie, bookmark: Bookmark.where(movie_id: movie, list_id: @list).first %>
+    <% end %>
+  </div>
+</div>
+<!-- End of Body -->
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add a movie to <%= @list.name %> :</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for [@list, @bookmark] do |f| %>
+          <%= f.input :movie_id, collection: Movie.all, value_method: :id,  prompt: "Select your movie" %>
+          <%= f.input :comment, label: false, placeholder: "Add a comment" %>
+          <%= f.button :submit, "Add", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

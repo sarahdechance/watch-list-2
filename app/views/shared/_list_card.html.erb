@@ -1,0 +1,20 @@
+<div class="card-block">
+  <%= link_to list_path(list), class: "link-fixed-cards", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+    <i class="fa-solid fa-x"></i>
+  <% end %>
+
+  <%= link_to list_path(list) do %>
+    <div class="card-list" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(<%= list.movies.count != 0 ? list.movies.first.poster_url : "https://www.ionos.fr/digitalguide/fileadmin/DigitalGuide/Teaser/movie-maker-alternative.jpg" %>)">
+      <h4><%= list.name %></h4>
+
+      <% if list.movies.count == 0 %>
+        <p>No movie</p>
+      <% elsif list.movies.count == 1 %>
+        <p><%= list.movies.count %> movie</p>
+      <% else %>
+        <p><%= list.movies.count %> movies</p>
+      <% end %>
+
+    </div>
+  <% end %>
+</div>
