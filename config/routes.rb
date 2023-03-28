@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   # bookmarks : toutes, nested
 
   resources :lists, except: %i[new edit update] do
-    resources :bookmarks, only: :create
+    resources :bookmarks, only: %i[create]
   end
 
-  resources :bookmarks, only: :destroy
+  resources :bookmarks, only: %i[update destroy]
 
 end

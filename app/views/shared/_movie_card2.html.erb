@@ -1,19 +1,17 @@
 <div class="card-block-movie">
+  <div class="top-links">
+    <!-- Button trigger modal -->
+    <%= link_to "", class: "edit", data: {bs_toggle: "modal", bs_target: "#exampleModal"} do %>
+      <i class="fa-solid fa-pen-to-square"></i>
+    <% end %>
+    <%= link_to bookmark_path(bookmark), class: "delete", data: {turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+      <i class="fa-solid fa-x"></i>
+    <% end %>
+  </div>
 
 
   <div class="card-movie">
-    <div class="card-movie-image" style='background-image: url("<%= movie.poster_url %>")'>
-      <div class="top-links">
-        <!-- Button trigger modal -->
-        <%= link_to "", data: {bs_toggle: "modal", bs_target: "#editBookmark#{bookmark.id}Modal"} do %>
-          <i class="fa-solid fa-pen-to-square"></i>
-        <% end %>
-        <%= link_to bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
-          <i class="fa-solid fa-x"></i>
-        <% end %>
-      </div>
-    </div>
-
+    <%= image_tag(movie.poster_url) %>
     <div class="card-movie-infos">
       <div class="card-movie-top">
         <h2 class="card-movie-title"><%= movie.title %></h2>
@@ -29,17 +27,17 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="editBookmark<%="#{bookmark.id}"%>Modal" tabindex="-1" aria-labelledby="editBookmark<%="#{bookmark.id}"%>ModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="editBookmark<%="#{bookmark.id}"%>ModalLabel">Update your bookmark :</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add a movie to <%= @list.name %> :</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <%= simple_form_for [bookmark] do |f| %>
           <%= f.input :comment, label: false%>
-          <%= f.button :submit, "Update", class: "btn btn-primary" %>
+          <%= f.button :submit, "Add", class: "btn btn-primary" %>
         <% end %>
       </div>
     </div>

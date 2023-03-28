@@ -54,7 +54,6 @@ a:has(.card-list) {
 
 
 // CARDS MOVIE
-
 .card-block-movie {
   position: relative;
 
@@ -62,11 +61,12 @@ a:has(.card-list) {
     color: white;
   }
 
-  .movie-link {
-    position: absolute;
-    top: 4px;
-    left: 339px;
+  .top-links {
+    display: flex;
+    justify-content: space-between;
+    padding: 1px 7px;
   }
+
 }
 
 .card-movie {
@@ -104,10 +104,12 @@ a:has(.card-list) {
 
 }
 
-.card-movie > img {
+.card-movie-image {
   height: 200px;
   width: 100%;
-  object-fit: cover;
+  background-size: cover;
+  background-position: center;
+
 }
 
 .card-movie-title {
