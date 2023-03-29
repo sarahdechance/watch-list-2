@@ -29,7 +29,7 @@
 
 
 
-<!-- Modal -->
+<!-- ModalPOUR CHOIX UNIQUE AVEC TOM SELECT -->
 <div class="modal fade" id="addMovieModal" tabindex="-1" aria-labelledby="addMovieModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -39,7 +39,7 @@
       </div>
       <div class="modal-body">
         <%= simple_form_for [@list, @bookmark] do |f| %>
-          <%= f.input :movie_id, collection: @allmovies, value_method: :id,  prompt: "Select your movie", input_html: {multiple: true,  data: {controller: "tom-select", tom_select_options_value: {tags: true}}} %>
+          <%= f.input :movie_id, collection: Movie.all, value_method: :id,  prompt: "Select your movie", input_html: {data: {controller: "tom-select"}} %>
           <%= f.input :comment, label: false, placeholder: "Add a comment" %>
           <%= f.button :submit, "Add", class: "btn btn-primary" %>
         <% end %>

@@ -8,6 +8,12 @@ class ListsController < ApplicationController
   def show
     @list = List.find(params[:id])
     @bookmark = Bookmark.new
+    @allmovies = Movie.all.to_a
+    
+    @list.movies.each do |movie|
+      @allmovies.delete_if { |mv| mv.id == movie.id }
+    end
+
   end
 
   def create
